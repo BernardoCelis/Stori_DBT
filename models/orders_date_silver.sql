@@ -4,12 +4,9 @@
 ) }}
 
 with ordered_data as (
-    select 
-        DATE_TRUNC('month', order_date) AS order_date,
-        order_id,
+    select date_trunc('month', order_date) AS order_date, order_id,
         row_number() over (partition by order_id order by order_date desc) as row_num 
-    from
-        bronze.sales_data.sales
+    from bronze.sales_data.sales
     {% if is_incremental() %}
         where order_date > (select max(order_date) from {{ this }}) 
     {% endif %}
