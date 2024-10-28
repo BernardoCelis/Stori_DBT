@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: sales_customers
+    description: "Total sales by customer"
+    columns:
+      - name: customer_id
+        description: "ID customer"
+        tests:
+          - not_null           # Test for not null in the custome_id variable
+          - unique             # Test unique values for customer_id
+      - name: total_amount
+        description: "Variable for the total amount in sales by customer"
+        tests:
+          - not_null           # Test for not null in the custome_id variable
+          - relationships:      # Verify tota_amount is well related with sales table
+              field: customer_id
+          - expression_is_true: 
+              expression: "total_amount >= 0"
+
+  - name: num_orders
+    description: "Number of transactions per month"
+    columns:
+      - name: order_date
+        description: "order date"
+      - name: n_orders
+        description: "Variable for the number of transactions per month"
+        tests:
+          - not_null           # Test for not null in the custome_id variable
+          - relationships:      # Verify tota_amount is well related with sales table
+              field: order_date
+          - expression_is_true: 
+              expression: "n_orders >= 0"
+
+  - name: sales_aggregation_modeling
+    description: "Incremental number of transactions per month"
+    columns:
+      - name: order_date
+        description: "order date"
+      - name: n_orders
+        description: "Number of transactions per month"
