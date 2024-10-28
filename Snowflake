@@ -1,4 +1,4 @@
-create warehouse try_stori;
+create warehouse transforming;
 create database bronze;
 create database proc;
 create schema bronze.sales_data;
