@@ -8,6 +8,13 @@ drop table ANALYTICS.DBT_LCELISPEREZ.orders_date_silver;
 
 create table bronze.sales_data.sales
 ( order_id integer,
+create warehouse try_stori;
+create database bronze;
+create database analytics;
+create schema bronze.sales_data;
+
+create table bronze.sales_data.sales
+( order_id integer,
   customer_id varchar,
   order_date date,
   amount double
@@ -27,11 +34,3 @@ values
     (10, 'C003', '2024-03-12', 120.50);
 
 select * from bronze.sales_data.sales;
-
-select customer_id, sum(amount) 
-from bronze.sales_data.sales
-group by 1;
-
-select date_trunc('month',order_date), count(order_id) as n_orders
-from bronze.sales_data.sales
-group by 1;
