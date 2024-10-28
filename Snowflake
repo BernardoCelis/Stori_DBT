@@ -1,6 +1,6 @@
 create warehouse transforming;
 create database bronze;
-create database proc;
+create database analytics;
 create schema bronze.sales_data;
 
 drop table raw.sales_data.sales;
